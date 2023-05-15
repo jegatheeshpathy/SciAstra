@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sciastra Chatbot</title>
+  <style>
+body {
+      background: linear-gradient(to bottom, #ff1493, #00bfff, #ff8c00);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+.chat-container {
+  max-width: 400px;
+  height: 500px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow-y: scroll;
+  padding: 10px;
+}
+
+.chat-log {
+  margin-bottom: 10px;
+}
+
+.bot-message {
+  background-color: #d3e9d3;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.user-input-container {
+  display: flex;
+}
+
+.user-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+  </style>
+</head>
+<body>
+    <center>
+  <div class="chat-container">
+    <div class="chat-log">
+      <div class="bot-message">Welcome! How can I assist you today?</div>
+    </div>
+    <input type="text" class="user-input" placeholder="Type your message...">
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const chatLog = document.querySelector('.chat-log');
+      const userInput = document.querySelector('.user-input');
+
+      function appendMessage(message, isUser = false) {
+        const messageClass = isUser ? 'user-message' : 'bot-message';
+        const messageElement = document.createElement('div');
+        messageElement.classList.add(messageClass);
+        messageElement.textContent = message;
+        chatLog.appendChild(messageElement);
+      }
+
+      function processUserInput() {
+        const userMessage = userInput.value;
+        appendMessage(userMessage, true);
+        let response;
+        if (userMessage.includes('application form deadline')) {
+          response = 'The application form deadline for various exams is usually announced on our website. Please visit the SciAstra.com section for more details.';
+        } 
+        else if (userMessage.includes('available courses')) {
+          response = 'We offer a wide range of courses in various subjects such as Math, Science, History, and Programming. You can explore our course catalog on our website to see the full list of available courses.';
+}       else if (userMessage.includes('enrollment process')) {
+          response = 'To enroll in a course, please visit our website and go to the enrollment page. You will find step-by-step instructions on how to register for the courses of your choice.';
+}       else if (userMessage.includes('course fees')) {
+          response = 'The course fees vary depending on the course you choose. You can find detailed information about the fees on our website, including any discounts or scholarships that may be available.';
+}       else if (userMessage.includes('course duration')) {
+          response = 'The duration of each course may vary. Some courses are self-paced, allowing you to complete them at your own pace, while others follow a specific schedule. You can find the duration information for each course in the course description on our website.';
+}       else if (userMessage.includes('course certificates')) {
+          response = 'Upon successful completion of a course, you will receive a course completion certificate. These certificates can be downloaded from your student dashboard on our website. They serve as proof of your achievements and can be a valuable addition to your resume or portfolio.';
+}
+        else {
+          response = "I'm sorry, I didn't understand your message. How can I assist you?";
+        }
+        setTimeout(function() {
+          appendMessage(response);
+        }, 500);
+
+        userInput.value = '';
+      }
+      userInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+          processUserInput();
+        }
+      });
+    });
+  </script>
+  </center>
+</body>
+</html>
